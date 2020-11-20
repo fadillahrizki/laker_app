@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         pullToRefresh = findViewById(R.id.pullToRefresh);
 
         webView = findViewById(R.id.webView);
+
+        webView.loadUrl("http://siokap.labura.go.id/web/site");
+
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -34,17 +39,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
             public void onPageFinished(WebView view, String url) {
                 pullToRefresh.setRefreshing(false);
             }
         });
 
-        webView.loadUrl("http://laker.labura.go.id/web/site");
-
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
         webSettings.setDomStorageEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         getSupportActionBar().hide();
 

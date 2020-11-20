@@ -11,7 +11,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Laker">
+        android:theme="@style/Theme.Siokap">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
